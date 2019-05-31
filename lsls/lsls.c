@@ -11,7 +11,14 @@ int main(int argc, char **argv)
 {
   // Parse command line
 
-  printf("%s\n", PROMPT);
+  int i;
+
+  printf("There are %d command line argument(s):\n", argc);
+
+  for (i = 0; i < argc; i++)
+  {
+    printf("   %s\n", argv[i]);
+  }
 
   // Open directory
   DIR *dir;
@@ -28,7 +35,6 @@ int main(int argc, char **argv)
     }
   }
 
-  // opens specified dir
   if ((dir = opendir(argv[1])) == NULL)
   {
     printf("Error occurred.");
@@ -40,6 +46,9 @@ int main(int argc, char **argv)
   {
     printf("  %s\n", d->d_name);
   }
+
+  // Close directory
+  closedir(dir);
 
   return 0;
 }
